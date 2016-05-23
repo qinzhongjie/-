@@ -1,0 +1,15 @@
+header {
+	font-family: "微软雅黑";
+	font-size: 15px;
+}
+.image img {
+	width: 100%;
+}
+#yaoyiyao {
+	width: 80%;
+	height: 60px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	display: block;
+	margin: 0 auto;
+}
