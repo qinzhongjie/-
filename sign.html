@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/layer.css"/>
+		<style>
+			body,
+			.mui-content {
+				background-color: #EA4146;
+			}
+			
+			body {
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			@-webkit-keyframes img1 {
+				0% {
+					-webkit-transform: translateX(50px) rotate(0deg);
+				}
+				100% {
+					-webkit-transform: translateX(-50px) rotate(-0deg);
+				}
+			}
+			
+			@keyframes img1 {
+				0% {
+					transform: translateX(50px) rotate(0deg);
+				}
+				100% {
+					transform: translateX(-50px) rotate(-0deg);
+				}
+			}
+			
+			.img1 {
+				text-align: center;
+				margin-top: 22.4%;
+				background-image: url(images/sign/bg.png);
+				background-repeat: no-repeat;
+				background-size: 100% auto;
+				background-position: 0% 0%;
+			}
+			
+			.img1 img {
+				width: 68.8%;
+			}
+			
+			.shake {
+				-webkit-animation: img1;
+				animation: img1;
+				-webkit-animation-duration: 0.1s;
+				animation-duration: 0.1s;
+				-webkit-animation-timing-function: linear;
+				animation-timing-function: linear;
+				-webkit-animation-iteration-count: 20;
+				animation-iteration-count: 1000;
+			}
+			
+			.img2 {
+				text-align: center;
+				margin: 15px 0 30px;
+			}
+			
+			.img2 img {
+				width: 73.9%;
+			}
+			
+			.tip {
+				text-align: center;
+				color: rgb(167, 91, 46);
+				background-color: rgb(255, 241, 88);
+				width: 72%;
+				margin: 0px auto;
+				border-radius: 5px;
+				line-height: 2;
+				font-size: 22px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">领积分</h1>
+		</header>
+		<div class="mui-content">
+			<div class="img1">
+				<img src="img/2.png" alt="" />
+			</div>
+			<div class="img2">
+				<img src="img/1.png" alt="" />
+			</div>
+			<div class="tip mui-hidden">
+				恭喜获得0积分
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/layer.js"></script>
+		<script src="js/common.js"></script>
+		<script>
+		var user = null;
+		var waiting = false;
+		mui.init({
+			swipeBack: true
+		});
+		mui.plusReady(function() {
+			user = getCachedUser(true);
+			if (!user) {
+				var h = plus.webview.getLaunchWebview();
+				mui.fire(h, "login");
+				mui.back();
+				return
+			}
+			var f = 10;
+			var g = 0;
+			var a = y = z = lastX = lastY = lastZ = 0;
+			plus.accelerometer.watchAcceleration(function(b) {
+				a = b.xAxis;
+				y = b.yAxis;
+				z = b.zAxis;
+				if (Math.abs(a - lastX) > f || Math.abs(y - lastY) > f || Math.abs(z - lastZ) > f) {
+					g++;
+					if (g > 1) {
+						g = 0;
+						if (!waiting) {
+							sign()
+						}
+					}
+				}
+				lastX = a;
+				lastY = y;
+				lastZ = z
+			}, function(b) {
+				console.log("Acceleration error: " + b.message)
+			})
+		});
+	
+		function sign() {
+			waiting = true;
+			document.querySelector(".img1").classList.add("shake");
+			mui.sendRequest(mui.constMap.ROOT_PATH + "/user/sign", {
+				session: user.session,
+				config: {
+					silence: true
+				}
+			}, function(a) {
+				waiting = false;
+				setTimeout("document.querySelector('.img1').classList.remove('shake')", 1000);
+				if (!a.status.succeed) {
+					if (a.status.error_code == 10015) {
+						layerOpen({
+							content: '<img src="img/sign_alert.jpg" style="width:100%;" onclick="layerClose()"/>',
+							style: {
+								content: "padding:0;background-color:#FFBEBA;"
+							},
+							title: "",
+							shadeClose: true
+						})
+					} else {
+						mui.toast(a.status.error_desc)
+					}
+					return
+				}
+				var b = document.querySelector(".tip");
+				b.innerHTML = a.data.contentStr;
+				b.classList.remove("mui-hidden");
+				user.user.pay_points = a.data.pay_points;
+				user.expire = mui.now();
+				user.expire += 15 * 60 * 1000;
+				window.localStorage.setItem("user", JSON.stringify(user))
+			})
+		};
+	</script>
+	</body>
+
+</html>

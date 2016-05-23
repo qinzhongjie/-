@@ -25,6 +25,11 @@
 						// Play audio
 						p = plus.audio.createPlayer("audio/shake.wav");
 						p.play();
+						
+						//隐藏结果区域
+						contentShow.style.display="none";
+						
+						
 						setTimeout( function(){
 							// Change background image
 							var index = Math.round(Math.random()*3+1);
@@ -41,6 +46,12 @@
 							p.stop();
 							delete p;
 							p = null;
+							
+							
+							//显示结果区域
+							contentShow.style.display="block";
+							
+							
 						}, 2000 );
 						// Animation
 						offset=up.offsetHeight/2;
@@ -61,9 +72,14 @@
 							
 						}, 700 );
 					}
+				
 				}, function ( e ) {
 					//outSet( "Watch failed: "+e.message );
 				}, {frequency:100} );
+				
+				
+				
+				
 			}
 			if(window.plus){
 				plusReady();
@@ -99,6 +115,7 @@
 				font-size: 40px;
 				line-height: 100px;
 				font-family: "微软雅黑";
+				display: none;
 				
 			}
 		</style>
