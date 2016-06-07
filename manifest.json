@@ -197,7 +197,9 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"css/style.css",
-					"img/123.png"
+					"img/123.png",
+					"fonts/mui.ttf",
+					"img/banner/1.jpg"
 				],
 				"refer": [
 					"yaoyiyao.html"

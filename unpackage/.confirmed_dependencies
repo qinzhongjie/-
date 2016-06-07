@@ -1,42 +1,44 @@
 {
-  "index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "img/123.png"
-    ],
-    "refer": [
-      "yaoyiyao.html"
-    ]
-  },
-  "yaoyiyao.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "img/shake/3.jpg",
-      "img/shake/1.jpg",
-      "js/common.js",
-      "css/common.css",
-      "js/immersed.js",
-      "img/shakedown.png",
-      "img/shakeup.png",
-      "img/shake/2.jpg",
-      "img/shake/4.jpg"
-    ],
-    "refer": []
-  },
-  "sign.html": {
-    "resources": [
-      "css/layer.css",
-      "js/common.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "js/layer.js",
-      "css/mui.min.css",
-      "img/1.png",
-      "img/2.png"
-    ],
-    "refer": []
-  }
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"img/123.png",
+			"fonts/mui.ttf",
+			"img/banner/1.jpg"
+		],
+		"refer": [
+			"yaoyiyao.html"
+		]
+	},
+	"yaoyiyao.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"img/shake/3.jpg",
+			"img/shake/1.jpg",
+			"js/common.js",
+			"css/common.css",
+			"js/immersed.js",
+			"img/shakedown.png",
+			"img/shakeup.png",
+			"img/shake/2.jpg",
+			"img/shake/4.jpg"
+		],
+		"refer": []
+	},
+	"sign.html": {
+		"resources": [
+			"css/layer.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"js/layer.js",
+			"css/mui.min.css",
+			"img/1.png",
+			"img/2.png"
+		],
+		"refer": []
+	}
 }
