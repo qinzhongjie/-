@@ -199,7 +199,11 @@
 					"css/style.css",
 					"img/123.png",
 					"fonts/mui.ttf",
-					"img/banner/1.jpg"
+					"img/banner/1.jpg",
+					"img/classify/1.jpg",
+					"img/classify/s3.jpg",
+					"img/classify/s6.jpg",
+					"img/classify/s5.jpg"
 				],
 				"refer": [
 					"yaoyiyao.html"
